@@ -5,7 +5,7 @@
 const cells = document.getElementById("answers-form")
 const instruction = document.getElementById("instructions")
 const numbersList = document.getElementById("numbers-list")
-let countdown = document.getElementById("countdown")
+const countdown = document.getElementById("countdown")
 let countdownTimer = 30
 const randomNumbers = []
 
@@ -30,13 +30,14 @@ for (let i = 0; i < randomNumbers.length; i++) {
 // Settiamo il countdown
 
 countdown.append(countdownTimer)
+
     
 const thirtySec =setInterval(countdownSetUp, 1000)
 
 // Funzioni
 
 function countdownSetUp(time){
-
+   
     countdownTimer = --countdownTimer
 
     if (countdownTimer === 0) {
@@ -48,6 +49,7 @@ function countdownSetUp(time){
     
     countdown.classList.add('d-none')
     }
+
 
     console.log(countdownTimer)
 }
