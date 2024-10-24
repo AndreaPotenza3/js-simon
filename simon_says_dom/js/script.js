@@ -4,7 +4,8 @@
 const cells = document.getElementById("answers-form")
 const instruction = document.getElementById("instructions")
 const countdown = document.getElementById("countdown")
-let countdownTimer = 30
+const numbersList = document.getElementById("numbers-list")
+let countdownTimer = 6
 const randomNumbers = []
 
 // Generiamo 5 numeri casuali tra 1 - 50
@@ -16,26 +17,24 @@ for (let i = 0; i < 5; i++) {
 console.log(randomNumbers)
 
 // Settiamo il countdown
-setTimeout(timer, 5000)
+//setTimeout(timer, 5000)
     
-function timer(){
-    cells.classList.remove('d-none')
-    instruction.innerHTML = 'Insersci i numeri visualizzati nella scheramata precendete!'
-        
-    
-    countdown.classList.add('d-none')
-    
-}
+const thirtySec =setInterval(countdownSetUp, 1000)
 
-
-
-
-setInterval(countdownSetUp, 1000)
-
+// Funzioni
 
 function countdownSetUp(time){
     countdownTimer = --countdownTimer
 
-    console.log()
+    if (countdownTimer === 0) {
+        clearInterval(thirtySec)
+        cells.classList.remove('d-none')
+    instruction.innerHTML = 'Insersci i numeri visualizzati nella scheramata precendete!'
+        
+    
+    countdown.classList.add('d-none')
+    }
+
+    console.log(countdownTimer)
 }
 
