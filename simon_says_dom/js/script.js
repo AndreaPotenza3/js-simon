@@ -3,7 +3,8 @@
 //Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 const cells = document.getElementById("answers-form")
 const instruction = document.getElementById("instructions")
-let countdown = 30
+const countdown = document.getElementById("countdown")
+let countdownTimer = 30
 const randomNumbers = []
 
 // Generiamo 5 numeri casuali tra 1 - 50
@@ -18,20 +19,23 @@ console.log(randomNumbers)
 setTimeout(timer, 5000)
     
 function timer(){
-    cells.classList.remove("d-none")
-    instruction.classList.add('d-none')
+    cells.classList.remove('d-none')
+    instruction.innerHTML = 'Insersci i numeri visualizzati nella scheramata precendete!'
+        
+    
+    countdown.classList.add('d-none')
     
 }
 
 
 
 
-setInterval(countdownTimer, 1000)
+setInterval(countdownSetUp, 1000)
 
 
-function countdownTimer(time){
-    countdown = --countdown
+function countdownSetUp(time){
+    countdownTimer = --countdownTimer
 
-    console.log(countdown)
+    console.log()
 }
 
