@@ -6,7 +6,7 @@ const cells = document.getElementById("answers-form")
 const instruction = document.getElementById("instructions")
 const numbersList = document.getElementById("numbers-list")
 const countdown = document.getElementById("countdown")
-let countdownTimer = 10
+let countdownTimer = 3
 const randomNumbers = []
 
 // Generiamo 5 numeri casuali tra 1 - 50
@@ -32,8 +32,19 @@ for (let i = 0; i < randomNumbers.length; i++) {
 //countdown.append(countdownTimer)
 countdown.innerHTML = countdownTimer
 
-    
 const thirtySec =setInterval(countdownSetUp, 1000)
+
+// Validazione
+
+const send = document.getElementById('btn')
+send.addEventListener('submit', function (event) {
+
+    event.preventDefault()
+
+    console.log('ho inviato il modulo')
+})
+
+
 
 // Funzioni
 
