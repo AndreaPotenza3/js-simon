@@ -6,18 +6,29 @@ const cells = document.getElementById("answers-form")
 const instruction = document.getElementById("instructions")
 const numbersList = document.getElementById("numbers-list")
 const countdown = document.getElementById("countdown")
-let countdownTimer = 0
+let countdownTimer = 1
 const formNumbers = document.getElementsByClassName("form-control")
 const randomNumbers = []
 const userNumbers =[]
+const inputsElement = document.querySelectorAll('input')
+const messageElement = document.getElementById('message')
 
 // Generiamo 5 numeri casuali tra 1 - 50
-for (let i = 0; i < 5; i++) {
-    const number = Math.floor(Math.random(50, 1) * 50)
-    randomNumbers.push(number)
+////for (let i = 0; i < 5; i++) {
+    ////const number = Math.floor(Math.random(50, 1) * 50)
+    ////randomNumbers.push(number)
+//}
+////console.log(randomNumbers)
+
+// while
+
+while(randomNumbers.length < 5) {
+    const number = Math.floor(Math.random(50, 1) * 50) +1
+    if (!randomNumbers.includes(number)) {
+        randomNumbers.push(number)
+    }
 }
 console.log(randomNumbers)
-
 
 // Creiamo la lista di numeri
 
@@ -32,47 +43,72 @@ for (let i = 0; i < randomNumbers.length; i++) {
 // Settiamo il countdown
 
 //countdown.append(countdownTimer)
-countdown.innerHTML = countdownTimer
 
-const thirtySec =setInterval(countdownSetUp, 1000)
+countdown.innerText = countdownTimer
+
+const thirtySec =setInterval(function () {
+
+    countdownTimer = --countdownTimer 
+
+    countdown.innerText = countdownTimer
+
+    if (countdownTimer === 0) {
+
+        clearInterval(thirtySec)
+
+    cells.classList.remove('d-none')
+
+    instruction.innerText = 'Insersci i numeri visualizzati nella schermata precendete!'
+        
+    numbersList.classList.add('d-none')
+    
+    countdown.classList.add('d-none')
+}
+},1000)
+
+
+
 
 // Validazione
 
-const send = document.getElementById("form-control")
-send.addEventListener('submit', function (event) {
+
+cells.addEventListener('submit', function (event) {
 
     event.preventDefault()
 
-    console.log(send)
+    let currentCount = 0
 
-    userNumbers.push(send.value)
-    console.log('ho cloccato')
-    console.log(userNumbers)
+    for (let i = 0; i < inputsElement.length; i++) {
+        const inputsNum = parseInt(inputsElement[i].value);
+
+        console.log(inputsNum)
+
+        if(!isNaN(inputsNum) && inputsNum >= 1 && inputsNum <= 50 && !userNumbers.includes(inputsNum)) {
+            console.log('pusho')
+        }
+
+        //if(tCount++randomNumbers.includes(inputsNum)) {
+            //curren
+        //}
+        userNumbers.push(inputsNum)
+        //messageElement.textContent = `Hai indovinato ${currentCount} numeri su 5`
+    }
+
+    for (let i = 0; i < userNumbers.length; i++) {
+
+        const userNumbersElement = userNumbers[i];
+
+         if(randomNumbers.includes(userNumbersElement)) {
+            currentCount++
+        }
+        
+    }
+    messageElement.textContent = `Hai indovinato ${currentCount} numeri su 5`
 })
+
 
 
 
 // Funzioni
 
-function countdownSetUp(time){
-   
-    countdown.innerHTML = countdownTimer
-    
-    countdownTimer = --countdownTimer
-
-    if (countdownTimer === -2) {
-        clearInterval(thirtySec)
-        cells.classList.remove('d-none')
-    instruction.innerHTML = 'Insersci i numeri visualizzati nella schermata precendete!'
-        
-    numbersList.classList.add('d-none')
-    
-    countdown.classList.add('d-none')
-
-    //countdown.classList.add('d-none')
-    }
-
-
-    console.log(countdownTimer)
-}
 
